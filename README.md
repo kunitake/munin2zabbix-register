@@ -27,6 +27,7 @@ SYSOPSIS
 DESCRIPTION
 --------------
         munin2zabbix-register.pl - This script can register zabbix items and graphs from munin-node plugins.
+        This program was inspired by zabbix_munin_plugin.py.
 
 SEE ALSO
 --------------
@@ -35,6 +36,9 @@ SEE ALSO
        ZabbixAPI for Perl
         https://github.com/mikeda/ZabbixAPI
         http://mikeda.jp/wiki/zabbixapi.pm
+
+       zabbix_munin_plugin.py
+        https://github.com/oopsops/scripts/tree/master/zabbix
 
 AUTHOR
 --------------
