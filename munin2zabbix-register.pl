@@ -1,9 +1,9 @@
 #!/usr/bin/perl
+
 use strict;
 use warnings;
 
 use ZabbixAPI;
-
 use Getopt::Long;
 use Pod::Usage 'pod2usage';
 
@@ -54,12 +54,6 @@ my $type = 2;
 # 4 - text.
 my $value_type = 0;
 
-# Delta
-# 0 - As is
-# 1 - Delta (speed per second)
-# 2 - Delta (simple change)
-my $delta = 0;
-
 # calc_fnc
 # 1 - min
 # 2 - avg
@@ -71,13 +65,6 @@ my $calc_fnc = 2;
 # 0 - left
 # 1 - right
 my $yaxisside = 0;
-
-#graph type
-# 0 - Normal
-# 1 - Stacked
-# 2 - Pie
-# 3 - Exploted
-my $graphtype = 0;
 
 # RBG
 my @colors = qw/0 1 2 3 4 5 6 7 8 9 a b c d e f/;
@@ -115,6 +102,21 @@ my $templateid = @$templateids[0];
 
 foreach my $plugin (@munin_plugins) {
 
+    # Delta
+    # 0 - As is
+    # 1 - Delta (speed per second)
+    # 2 - Delta (simple change)
+    my $delta = 0;
+
+    #graph type
+    # 0 - Normal
+    # 1 - Stacked
+    # 2 - Pie
+    # 3 - Exploted
+    my $graphtype = 0;
+
+    chomp($plugin);
+
     # get from munin config
     my @munin_configs = `$munin_run_command $plugin config`;
     my %munin_graph   = ();
@@ -133,15 +135,14 @@ foreach my $plugin (@munin_plugins) {
         }
     }
 
-    #
-    my @gitems;
+    my @gitems    = ();
     my $sortorder = 0;
     foreach my $key ( keys %munin_item ) {
         $delta = 1
             if ( $munin_item{$key}{'type'} eq 'DERIVE'
             || $munin_item{$key}{draw} eq 'COUNTER' );
         $delta = 2 if ( $munin_item{$key}{'type'} eq 'ABSOLUTE' );
-        my $gitem_ref = '';
+        my $gitem_ref   = ();
         my $createitems = $za->item_create(
             {   'name'       => 'Munin Plugin $1.$2',
                 'key_'       => "munin[$plugin,$key]",
