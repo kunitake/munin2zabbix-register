@@ -31,6 +31,9 @@ DESCRIPTION
 
 SEE ALSO
 --------------
+      munin2zabbix-sender ( This script can send data from munin plugins to zabbix via zabbix_sender. )
+      https://github.com/kunitake/munin2zabbix-sender
+
        https://raw.github.com/kunitake/munin2zabbix-register/master/README.md
 
        ZabbixAPI for Perl
