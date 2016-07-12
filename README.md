@@ -28,6 +28,10 @@ DESCRIPTION
 --------------
         munin2zabbix-register.pl - This script can register zabbix items and graphs from munin-node plugins.
         This program was inspired by zabbix_munin_plugin.py.
+        
+LIMITATION!!
+---------------
+        munin2zabbix-register.pl CAN NOT take care of CDEF itself.
 
 SEE ALSO
 --------------
